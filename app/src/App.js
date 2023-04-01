@@ -1,21 +1,32 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import TodoForm from "./components/TodoForm";
 import TodoList from "./components/TodoList";
 import TodoSettings from "./components/TodoSettings";
 
 function App() {
-  const [todos, setTodos] = useState([
-    {
-      id: 1,
-      todoName: "example1",
-      checked: false,
-    },
-    {
-      id: 2,
-      todoName: "example2",
-      checked: false,
-    },
-  ]);
+  const [todos, setTodos] = useState([]);
+  const todoNameRef = useRef();
+
+  function updateTodoList() {
+    const todoName = todoNameRef.current.value;
+    if (todoName === "") return null;
+    setTodos((prevTodos) => {
+      return [
+        ...prevTodos,
+        {
+          id: Math.random() * 1000,
+          todoNameText: todoName,
+          complete: false,
+        },
+      ];
+    });
+    todoNameRef.current.value = "";
+    console.log(todos);
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+  }
 
   return (
     <div className="App">
@@ -24,7 +35,11 @@ function App() {
         <button>theme plchld</button>
       </header>
       <main>
-        <TodoForm />
+        <TodoForm
+          todoNameRef={todoNameRef}
+          handleSubmit={handleSubmit}
+          updateTodoList={updateTodoList}
+        />
         <TodoList todos={todos} />
         <TodoSettings />
       </main>

@@ -1,7 +1,8 @@
 import React from "react";
 import Todo from "./Todo";
 
-export default function TodoList({ todos }) {
+export default function TodoList(props) {
+  const { todos } = props;
   return (
     <section>
       <ul>
