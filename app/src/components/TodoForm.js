@@ -1,11 +1,11 @@
 import React from "react";
 
 export default function TodoForm(props) {
-  const { todoNameRef, handleSubmit, updateTodoList } = props;
+  const { inputRef, handleSubmit, handleAddTodo } = props;
   return (
     <form onSubmit={handleSubmit}>
-      <button onClick={updateTodoList}>Add</button>
-      <input type="text" ref={todoNameRef} />
+      <button onClick={handleAddTodo}>Add</button>
+      <input type="text" ref={inputRef} />
     </form>
   );
 }

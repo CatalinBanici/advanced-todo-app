@@ -5,10 +5,10 @@ import TodoSettings from "./components/TodoSettings";
 
 function App() {
   const [todos, setTodos] = useState([]);
-  const todoNameRef = useRef();
+  const inputRef = useRef();
 
-  function updateTodoList() {
-    const todoName = todoNameRef.current.value;
+  function handleAddTodo() {
+    const todoName = inputRef.current.value;
     if (todoName === "") return null;
     setTodos((prevTodos) => {
       return [
@@ -20,8 +20,25 @@ function App() {
         },
       ];
     });
-    todoNameRef.current.value = "";
+    inputRef.current.value = "";
     console.log(todos);
+  }
+
+  function handleCheckTodo(id) {
+    const todoObject = [...todos];
+    const todoToCheck = todoObject.find((todo) => todo.id === id);
+    todoToCheck.complete = !todoToCheck.complete;
+    setTodos(todoObject);
+  }
+
+  function handleClearTodo() {
+    const todosToClear = todos.filter((todo) => !todo.complete);
+    setTodos(todosToClear);
+  }
+
+  function handleDeleteTodo(id) {
+    const todoToDelete = todos.filter((todo) => todo.id !== id);
+    setTodos(todoToDelete);
   }
 
   function handleSubmit(e) {
@@ -36,12 +53,16 @@ function App() {
       </header>
       <main>
         <TodoForm
-          todoNameRef={todoNameRef}
+          inputRef={inputRef}
           handleSubmit={handleSubmit}
-          updateTodoList={updateTodoList}
+          handleAddTodo={handleAddTodo}
         />
-        <TodoList todos={todos} />
-        <TodoSettings />
+        <TodoList
+          todos={todos}
+          handleCheckTodo={handleCheckTodo}
+          handleDeleteTodo={handleDeleteTodo}
+        />
+        <TodoSettings todos={todos} handleClearTodo={handleClearTodo} />
       </main>
     </div>
   );
