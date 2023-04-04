@@ -1,10 +1,12 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import TodoForm from "./components/TodoForm";
 import TodoList from "./components/TodoList";
 import TodoSettings from "./components/TodoSettings";
 
 function App() {
   const [todos, setTodos] = useState([]);
+  const [filter, setFilter] = useState("all");
+  const [filteredTodos, setFilteredTodos] = useState(todos);
   const inputRef = useRef();
 
   function handleAddTodo() {
@@ -21,7 +23,6 @@ function App() {
       ];
     });
     inputRef.current.value = "";
-    console.log(todos);
   }
 
   function handleCheckTodo(id) {
@@ -45,6 +46,22 @@ function App() {
     e.preventDefault();
   }
 
+  useEffect(() => {
+    function handleFilters() {
+      switch (filter) {
+        case "active":
+          setFilteredTodos(todos.filter((todo) => !todo.complete));
+          break;
+        case "completed":
+          setFilteredTodos(todos.filter((todo) => todo.complete));
+          break;
+        default:
+          setFilteredTodos(todos);
+      }
+    }
+    handleFilters();
+  }, [todos, filter]);
+
   return (
     <div className="App">
       <header>
@@ -58,11 +75,15 @@ function App() {
           handleAddTodo={handleAddTodo}
         />
         <TodoList
-          todos={todos}
           handleCheckTodo={handleCheckTodo}
           handleDeleteTodo={handleDeleteTodo}
+          filteredTodos={filteredTodos}
         />
-        <TodoSettings todos={todos} handleClearTodo={handleClearTodo} />
+        <TodoSettings
+          todos={todos}
+          handleClearTodo={handleClearTodo}
+          setFilter={setFilter}
+        />
       </main>
     </div>
   );
