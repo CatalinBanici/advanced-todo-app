@@ -5,7 +5,7 @@ export default function TodoForm(props) {
   return (
     <form>
       <button onClick={handleAddTodo}>Add</button>
-      <input type="text" ref={inputRef} />
+      <input type="text" placeholder="Create a new todo..." ref={inputRef} />
     </form>
   );
 }

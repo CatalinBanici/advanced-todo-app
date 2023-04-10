@@ -17,6 +17,7 @@ function App() {
   const [todos, setTodos] = useState(STORED_TODOS);
   const [filter, setFilter] = useState(STORED_FILTER);
   const [filteredTodos, setFilteredTodos] = useState(todos);
+  const [searchInput, setSearchInput] = useState("");
   const inputRef = useRef();
 
   useEffect(() => {
@@ -70,12 +71,19 @@ function App() {
         case "completed":
           setFilteredTodos(todos.filter((todo) => todo.complete));
           break;
+        case "search":
+          setFilteredTodos(
+            todos.filter((todo) =>
+              todo.textContent.toLowerCase().includes(searchInput.toLowerCase())
+            )
+          );
+          break;
         default:
           setFilteredTodos(todos);
       }
     }
     handleFilters();
-  }, [todos, filter]);
+  }, [todos, filter, searchInput]);
 
   return (
     <div className="App">
@@ -94,6 +102,8 @@ function App() {
           todos={todos}
           handleClearTodo={handleClearTodo}
           setFilter={setFilter}
+          searchInput={searchInput}
+          setSearchInput={setSearchInput}
         />
         <p>Drag and drop to reorder list</p>
       </main>
