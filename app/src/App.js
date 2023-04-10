@@ -5,18 +5,27 @@ import TodoSettings from "./components/TodoSettings";
 
 function App() {
   const LOCAL_STORAGE_TODO_KEY = "todoList.key";
+  const LOCAL_STORAGE_FILTER_KEY = "filter.key";
   const STORED_TODOS = localStorage.getItem(LOCAL_STORAGE_TODO_KEY)
     ? JSON.parse(localStorage.getItem(LOCAL_STORAGE_TODO_KEY))
     : [];
 
+  const STORED_FILTER = localStorage.getItem(LOCAL_STORAGE_FILTER_KEY)
+    ? JSON.parse(localStorage.getItem(LOCAL_STORAGE_FILTER_KEY))
+    : "all";
+
   const [todos, setTodos] = useState(STORED_TODOS);
-  const [filter, setFilter] = useState("all");
+  const [filter, setFilter] = useState(STORED_FILTER);
   const [filteredTodos, setFilteredTodos] = useState(todos);
   const inputRef = useRef();
 
   useEffect(() => {
     localStorage.setItem(LOCAL_STORAGE_TODO_KEY, JSON.stringify(todos));
   }, [todos]);
+
+  useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_FILTER_KEY, JSON.stringify(filter));
+  }, [filter]);
 
   function handleAddTodo(e) {
     e.preventDefault();
@@ -27,7 +36,7 @@ function App() {
         ...prevTodos,
         {
           id: Math.random() * 1000,
-          content: inputRefValue,
+          textContent: inputRefValue,
           complete: false,
         },
       ];
