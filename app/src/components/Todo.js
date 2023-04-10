@@ -11,7 +11,7 @@ export default function Todo(props) {
           checked={todo.complete}
           onChange={() => handleCheckTodo(todo.id)}
         />
-        <p>{todo.todoNameText}</p>
+        <p>{todo.content}</p>
       </label>
       <button onClick={() => handleDeleteTodo(todo.id)}>X</button>
     </li>

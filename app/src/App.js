@@ -4,20 +4,30 @@ import TodoList from "./components/TodoList";
 import TodoSettings from "./components/TodoSettings";
 
 function App() {
-  const [todos, setTodos] = useState([]);
+  const LOCAL_STORAGE_TODO_KEY = "todoList.key";
+  const STORED_TODOS = localStorage.getItem(LOCAL_STORAGE_TODO_KEY)
+    ? JSON.parse(localStorage.getItem(LOCAL_STORAGE_TODO_KEY))
+    : [];
+
+  const [todos, setTodos] = useState(STORED_TODOS);
   const [filter, setFilter] = useState("all");
   const [filteredTodos, setFilteredTodos] = useState(todos);
   const inputRef = useRef();
 
-  function handleAddTodo() {
-    const todoName = inputRef.current.value;
-    if (todoName === "") return null;
+  useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_TODO_KEY, JSON.stringify(todos));
+  }, [todos]);
+
+  function handleAddTodo(e) {
+    e.preventDefault();
+    const inputRefValue = inputRef.current.value;
+    if (inputRefValue === "") return null;
     setTodos((prevTodos) => {
       return [
         ...prevTodos,
         {
           id: Math.random() * 1000,
-          todoNameText: todoName,
+          content: inputRefValue,
           complete: false,
         },
       ];
@@ -40,10 +50,6 @@ function App() {
   function handleDeleteTodo(id) {
     const todoToDelete = todos.filter((todo) => todo.id !== id);
     setTodos(todoToDelete);
-  }
-
-  function handleSubmit(e) {
-    e.preventDefault();
   }
 
   useEffect(() => {
@@ -69,11 +75,7 @@ function App() {
         <button>theme plchld</button>
       </header>
       <main>
-        <TodoForm
-          inputRef={inputRef}
-          handleSubmit={handleSubmit}
-          handleAddTodo={handleAddTodo}
-        />
+        <TodoForm inputRef={inputRef} handleAddTodo={handleAddTodo} />
         <TodoList
           handleCheckTodo={handleCheckTodo}
           handleDeleteTodo={handleDeleteTodo}
@@ -84,6 +86,7 @@ function App() {
           handleClearTodo={handleClearTodo}
           setFilter={setFilter}
         />
+        <p>Drag and drop to reorder list</p>
       </main>
     </div>
   );
