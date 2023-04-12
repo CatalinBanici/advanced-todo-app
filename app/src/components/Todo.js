@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function Todo(props) {
-  const { todo, handleCheckTodo, handleDeleteTodo } = props;
+  const { todo, handleCheckTodo, handleDeleteTodo, handleToggleEdit } = props;
 
   return (
     <li>
@@ -13,6 +13,12 @@ export default function Todo(props) {
         />
         <p>{todo.textContent}</p>
       </label>
+      <button
+        onClick={() => handleToggleEdit(todo.id)}
+        disabled={todo.isEditing}
+      >
+        edit
+      </button>
       <button onClick={() => handleDeleteTodo(todo.id)}>X</button>
     </li>
   );

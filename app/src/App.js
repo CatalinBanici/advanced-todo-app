@@ -19,6 +19,7 @@ function App() {
   const [filteredTodos, setFilteredTodos] = useState(todos);
   const [searchInput, setSearchInput] = useState("");
   const inputRef = useRef();
+  const [editInput, setEditInput] = useState("");
 
   useEffect(() => {
     localStorage.setItem(LOCAL_STORAGE_TODO_KEY, JSON.stringify(todos));
@@ -39,11 +40,32 @@ function App() {
           id: Math.random() * 1000,
           textContent: inputRefValue,
           complete: false,
+          isEditing: false,
         },
       ];
     });
     inputRef.current.value = "";
   }
+
+  function handleToggleEdit(id) {
+    setTodos(
+      todos.map((todo) =>
+        todo.id === id ? { ...todo, isEditing: !todo.isEditing } : todo
+      )
+    );
+  }
+
+  function handleUpdateTodo(id) {
+    setTodos(
+      todos.map((todo) =>
+        todo.id === id
+          ? { ...todo, textContent: editInput, isEditing: !todo.isEditing }
+          : todo
+      )
+    );
+  }
+
+  console.log(todos);
 
   function handleCheckTodo(id) {
     const todoObject = [...todos];
@@ -97,6 +119,10 @@ function App() {
           handleCheckTodo={handleCheckTodo}
           handleDeleteTodo={handleDeleteTodo}
           filteredTodos={filteredTodos}
+          editInput={editInput}
+          setEditInput={setEditInput}
+          handleToggleEdit={handleToggleEdit}
+          handleUpdateTodo={handleUpdateTodo}
         />
         <TodoSettings
           todos={todos}
