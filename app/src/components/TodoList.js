@@ -19,10 +19,11 @@ export default function TodoList(props) {
           todo.isEditing ? (
             <TodoEditForm
               key={todo.id}
+              todo={todo}
               editInput={editInput}
               setEditInput={setEditInput}
               handleUpdateTodo={handleUpdateTodo}
-              todo={todo}
+              handleToggleEdit={handleToggleEdit}
             />
           ) : (
             <Todo

@@ -19,7 +19,7 @@ function App() {
   const [filteredTodos, setFilteredTodos] = useState(todos);
   const [searchInput, setSearchInput] = useState("");
   const inputRef = useRef();
-  const [editInput, setEditInput] = useState("");
+  const [editInput, setEditInput] = useState(""); // make it the original value to be shown here
 
   useEffect(() => {
     localStorage.setItem(LOCAL_STORAGE_TODO_KEY, JSON.stringify(todos));
@@ -56,6 +56,7 @@ function App() {
   }
 
   function handleUpdateTodo(id) {
+    if (!editInput) return null;
     setTodos(
       todos.map((todo) =>
         todo.id === id
@@ -63,9 +64,8 @@ function App() {
           : todo
       )
     );
+    setEditInput("");
   }
-
-  console.log(todos);
 
   function handleCheckTodo(id) {
     const todoObject = [...todos];

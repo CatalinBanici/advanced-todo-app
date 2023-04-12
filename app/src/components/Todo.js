@@ -13,12 +13,8 @@ export default function Todo(props) {
         />
         <p>{todo.textContent}</p>
       </label>
-      <button
-        onClick={() => handleToggleEdit(todo.id)}
-        disabled={todo.isEditing}
-      >
-        edit
-      </button>
+      {/* add a style to disable the edit button while isEditing is true */}
+      <button onClick={() => handleToggleEdit(todo.id)}>edit</button>
       <button onClick={() => handleDeleteTodo(todo.id)}>X</button>
     </li>
   );
