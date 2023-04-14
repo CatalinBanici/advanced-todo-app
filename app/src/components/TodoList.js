@@ -4,11 +4,9 @@ import TodoEditForm from "./TodoEditForm";
 
 export default function TodoList(props) {
   const {
+    filteredTodos,
     handleCheckTodo,
     handleDeleteTodo,
-    filteredTodos,
-    editInput,
-    setEditInput,
     handleToggleEdit,
     handleUpdateTodo,
   } = props;
@@ -20,8 +18,6 @@ export default function TodoList(props) {
             <TodoEditForm
               key={todo.id}
               todo={todo}
-              editInput={editInput}
-              setEditInput={setEditInput}
               handleUpdateTodo={handleUpdateTodo}
               handleToggleEdit={handleToggleEdit}
             />
@@ -31,7 +27,6 @@ export default function TodoList(props) {
               todo={todo}
               handleCheckTodo={handleCheckTodo}
               handleDeleteTodo={handleDeleteTodo}
-              filteredTodos={filteredTodos}
               handleToggleEdit={handleToggleEdit}
             />
           )

@@ -1,11 +1,16 @@
 import React from "react";
 
 export default function TodoSettings(props) {
-  const { todos, handleClearTodo, setFilter, searchInput, setSearchInput } =
-    props;
+  const {
+    todos,
+    handleClearTodo,
+    setFilterOption,
+    searchInput,
+    setSearchInput,
+  } = props;
 
-  function handleFilterClick(status) {
-    setFilter(status);
+  function handleFilterOption(status) {
+    setFilterOption(status);
   }
   return (
     <aside>
@@ -17,13 +22,13 @@ export default function TodoSettings(props) {
           value={searchInput}
           onChange={(e) => {
             setSearchInput(e.target.value);
-            handleFilterClick("search");
+            handleFilterOption("search");
           }}
         />
         <div>
-          <button onClick={() => handleFilterClick("all")}>All</button>
-          <button onClick={() => handleFilterClick("active")}>Active</button>
-          <button onClick={() => handleFilterClick("completed")}>
+          <button onClick={() => handleFilterOption("all")}>All</button>
+          <button onClick={() => handleFilterOption("active")}>Active</button>
+          <button onClick={() => handleFilterOption("completed")}>
             Completed
           </button>
         </div>

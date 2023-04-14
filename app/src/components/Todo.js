@@ -5,15 +5,12 @@ export default function Todo(props) {
 
   return (
     <li>
-      <label>
-        <input
-          type="checkbox"
-          checked={todo.complete}
-          onChange={() => handleCheckTodo(todo.id)}
-        />
-        <p>{todo.textContent}</p>
-      </label>
-      {/* add a style to disable the edit button while isEditing is true */}
+      <input
+        type="checkbox"
+        checked={todo.complete}
+        onChange={() => handleCheckTodo(todo.id)}
+      />
+      <p>{todo.textContent}</p>
       <button onClick={() => handleToggleEdit(todo.id)}>edit</button>
       <button onClick={() => handleDeleteTodo(todo.id)}>X</button>
     </li>

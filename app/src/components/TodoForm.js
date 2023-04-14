@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useRef } from "react";
 
 export default function TodoForm(props) {
-  const { inputRef, handleAddTodo } = props;
+  const { handleAddTodo } = props;
+  const inputRef = useRef();
+
+  function addTodo() {
+    handleAddTodo(inputRef);
+  }
   return (
-    <form>
-      <button onClick={handleAddTodo}>Add</button>
+    <form onSubmit={(e) => e.preventDefault()}>
+      <button onClick={addTodo}>Add</button>
       <input type="text" placeholder="Create a new todo..." ref={inputRef} />
     </form>
   );

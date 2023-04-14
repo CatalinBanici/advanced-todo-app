@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import TodoForm from "./components/TodoForm";
 import TodoList from "./components/TodoList";
 import TodoSettings from "./components/TodoSettings";
@@ -15,23 +15,27 @@ function App() {
     : "all";
 
   const [todos, setTodos] = useState(STORED_TODOS);
-  const [filter, setFilter] = useState(STORED_FILTER);
+  const [filterOption, setFilterOption] = useState(STORED_FILTER);
   const [filteredTodos, setFilteredTodos] = useState(todos);
   const [searchInput, setSearchInput] = useState("");
-  const inputRef = useRef();
+
+  // local storage
 
   useEffect(() => {
     localStorage.setItem(LOCAL_STORAGE_TODO_KEY, JSON.stringify(todos));
   }, [todos]);
 
   useEffect(() => {
-    localStorage.setItem(LOCAL_STORAGE_FILTER_KEY, JSON.stringify(filter));
-  }, [filter]);
+    localStorage.setItem(
+      LOCAL_STORAGE_FILTER_KEY,
+      JSON.stringify(filterOption)
+    );
+  }, [filterOption]);
 
-  function handleAddTodo(e) {
-    e.preventDefault();
-    const inputRefValue = inputRef.current.value;
-    if (inputRefValue === "") return null;
+  //adding todo to the list
+  function handleAddTodo(input) {
+    const inputRefValue = input.current.value;
+    if (!inputRefValue || /^\s*$/.test(inputRefValue)) return null;
     setTodos((prevTodos) => {
       return [
         ...prevTodos,
@@ -43,9 +47,10 @@ function App() {
         },
       ];
     });
-    inputRef.current.value = "";
+    input.current.value = "";
   }
 
+  // editing todos
   function handleToggleEdit(id) {
     setTodos(
       todos.map((todo) =>
@@ -55,7 +60,7 @@ function App() {
   }
 
   function handleUpdateTodo(input, id) {
-    if (!input) return null;
+    if (!input || /^\s*$/.test(input)) return null;
     setTodos(
       todos.map((todo) =>
         todo.id === id
@@ -65,6 +70,7 @@ function App() {
     );
   }
 
+  // checking complete and deleting todos
   function handleCheckTodo(id) {
     const todoObject = [...todos];
     const todoToCheck = todoObject.find((todo) => todo.id === id);
@@ -82,14 +88,17 @@ function App() {
     setTodos(todoToDelete);
   }
 
+  // filtering todos
   useEffect(() => {
     function handleFilters() {
-      switch (filter) {
+      switch (filterOption) {
         case "active":
           setFilteredTodos(todos.filter((todo) => !todo.complete));
+          setSearchInput("");
           break;
         case "completed":
           setFilteredTodos(todos.filter((todo) => todo.complete));
+          setSearchInput("");
           break;
         case "search":
           setFilteredTodos(
@@ -100,10 +109,11 @@ function App() {
           break;
         default:
           setFilteredTodos(todos);
+          setSearchInput("");
       }
     }
     handleFilters();
-  }, [todos, filter, searchInput]);
+  }, [todos, filterOption, searchInput]);
 
   return (
     <div className="App">
@@ -112,20 +122,20 @@ function App() {
         <button>theme plchld</button>
       </header>
       <main>
-        <TodoForm inputRef={inputRef} handleAddTodo={handleAddTodo} />
+        <TodoForm handleAddTodo={handleAddTodo} />
         <TodoList
+          filteredTodos={filteredTodos}
           handleCheckTodo={handleCheckTodo}
           handleDeleteTodo={handleDeleteTodo}
-          filteredTodos={filteredTodos}
           handleToggleEdit={handleToggleEdit}
           handleUpdateTodo={handleUpdateTodo}
         />
         <TodoSettings
           todos={todos}
-          handleClearTodo={handleClearTodo}
-          setFilter={setFilter}
           searchInput={searchInput}
           setSearchInput={setSearchInput}
+          setFilterOption={setFilterOption}
+          handleClearTodo={handleClearTodo}
         />
         <p>Drag and drop to reorder list</p>
       </main>
