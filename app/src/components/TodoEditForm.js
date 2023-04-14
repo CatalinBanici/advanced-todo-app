@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 
 export default function TodoEditForm(props) {
-  const { editInput, setEditInput, handleUpdateTodo, handleToggleEdit, todo } =
-    props;
+  const { handleUpdateTodo, handleToggleEdit, todo } = props;
+
+  const [editInput, setEditInput] = useState(todo.textContent);
+
+  function handleSubmit() {
+    handleUpdateTodo(editInput, todo.id);
+  }
+
   return (
     <form onSubmit={(e) => e.preventDefault()}>
-      <button onClick={() => handleUpdateTodo(todo.id)}>update</button>
+      <button onClick={() => handleSubmit()}>update</button>
       <input
         type="text"
         placeholder="Update todo..."
