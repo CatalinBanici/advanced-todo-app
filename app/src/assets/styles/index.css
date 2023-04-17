@@ -1,5 +1,57 @@
+@font-face {
+  font-family: "Josefin Sans";
+  src: url(../fonts/JosefinSans-VariableFont_wght.ttf);
+}
+
+:root {
+  --Background: hsl(235, 21%, 11%);
+  --TodoBackground: hsl(235, 24%, 19%);
+  --Text1: hsl(234, 39%, 85%);
+  --Text2: hsl(234, 11%, 52%);
+  --Text3: hsl(233, 14%, 35%);
+  --Text4: hsl(237, 14%, 26%);
+  --TextHover: hsl(236, 33%, 92%);
+
+  --BrightBlue: hsl(220, 98%, 61%);
+  --CheckBackground: linear-gradient hsl(192, 100%, 67%) to hsl(280, 87%, 65%);
+}
+
+[data-theme="light"] {
+  --Background: hsl(0, 0%, 98%);
+  --TodoBackground: hsl(0, 0%, 100%);
+  --Text1: hsl(235, 19%, 35%);
+  --Text2: hsl(236, 9%, 61%);
+  --Text3: hsl(233, 11%, 84%);
+  --Text4: hsl(236, 33%, 92%);
+  --TextHover: hsl(235, 19%, 35%);
+
+  --BrightBlue: hsl(220, 98%, 61%);
+  --CheckBackground: linear-gradient hsl(192, 100%, 67%) to hsl(280, 87%, 65%);
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+body {
+  font-family: "Josefin Sans";
+  font-size: 18px;
+}
+
+.background-dark {
+  background-color: var(--Background);
+  background-image: url(../images/bg-desktop-dark.jpg);
+  background-repeat: no-repeat;
+  background-position: top;
+  background-size: contain;
+}
+
+.background-light {
+  background-color: var(--Background);
+  background-image: url(../images/bg-desktop-light.jpg);
+  background-repeat: no-repeat;
+  background-position: top;
+  background-size: contain;
 }

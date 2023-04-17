@@ -3,9 +3,14 @@ import TodoForm from "./components/TodoForm";
 import TodoList from "./components/TodoList";
 import TodoSettings from "./components/TodoSettings";
 
+import { ReactComponent as ThemeButtonLight } from "./assets/images/icon-sun.svg";
+import { ReactComponent as ThemeButtonDark } from "./assets/images/icon-moon.svg";
+
 function App() {
   const LOCAL_STORAGE_TODO_KEY = "todoList.key";
   const LOCAL_STORAGE_FILTER_KEY = "filter.key";
+  const LOCAL_STORAGE_THEME_KEY = "theme.key";
+
   const STORED_TODOS = localStorage.getItem(LOCAL_STORAGE_TODO_KEY)
     ? JSON.parse(localStorage.getItem(LOCAL_STORAGE_TODO_KEY))
     : [];
@@ -14,11 +19,15 @@ function App() {
     ? JSON.parse(localStorage.getItem(LOCAL_STORAGE_FILTER_KEY))
     : "all";
 
+  const STORED_THEME = localStorage.getItem(LOCAL_STORAGE_THEME_KEY)
+    ? JSON.parse(localStorage.getItem(LOCAL_STORAGE_THEME_KEY))
+    : "dark";
+
   const [todos, setTodos] = useState(STORED_TODOS);
   const [filterOption, setFilterOption] = useState(STORED_FILTER);
   const [filteredTodos, setFilteredTodos] = useState(todos);
   const [searchInput, setSearchInput] = useState("");
-
+  const [theme, setTheme] = useState(STORED_THEME);
   // local storage
 
   useEffect(() => {
@@ -31,6 +40,10 @@ function App() {
       JSON.stringify(filterOption)
     );
   }, [filterOption]);
+
+  useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_THEME_KEY, JSON.stringify(theme));
+  }, [theme]);
 
   //adding todo to the list
   function handleAddTodo(input) {
@@ -115,30 +128,47 @@ function App() {
     handleFilters();
   }, [todos, filterOption, searchInput]);
 
+  // theme
+  function handleThemeChange() {
+    const newTheme = theme === "dark" ? "light" : "dark";
+    setTheme(newTheme);
+  }
+
   return (
-    <div className="App">
-      <header>
-        <h1>TODO</h1>
-        <button>theme plchld</button>
-      </header>
-      <main>
-        <TodoForm handleAddTodo={handleAddTodo} />
-        <TodoList
-          filteredTodos={filteredTodos}
-          handleCheckTodo={handleCheckTodo}
-          handleDeleteTodo={handleDeleteTodo}
-          handleToggleEdit={handleToggleEdit}
-          handleUpdateTodo={handleUpdateTodo}
-        />
-        <TodoSettings
-          todos={todos}
-          searchInput={searchInput}
-          setSearchInput={setSearchInput}
-          setFilterOption={setFilterOption}
-          handleClearTodo={handleClearTodo}
-        />
-        <p>Drag and drop to reorder list</p>
-      </main>
+    <div
+      className={
+        theme === "dark"
+          ? "app-body background-dark"
+          : "app-body background-light"
+      }
+      data-theme={theme}
+    >
+      <div className="app-container">
+        <header>
+          <h1>TODO</h1>
+          <button onClick={handleThemeChange}>
+            {theme === "dark" ? <ThemeButtonLight /> : <ThemeButtonDark />}
+          </button>
+        </header>
+        <main>
+          <TodoForm handleAddTodo={handleAddTodo} />
+          <TodoList
+            filteredTodos={filteredTodos}
+            handleCheckTodo={handleCheckTodo}
+            handleDeleteTodo={handleDeleteTodo}
+            handleToggleEdit={handleToggleEdit}
+            handleUpdateTodo={handleUpdateTodo}
+          />
+          <TodoSettings
+            todos={todos}
+            searchInput={searchInput}
+            setSearchInput={setSearchInput}
+            setFilterOption={setFilterOption}
+            handleClearTodo={handleClearTodo}
+          />
+          <p>Drag and drop to reorder list</p>
+        </main>
+      </div>
     </div>
   );
 }
