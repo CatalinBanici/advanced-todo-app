@@ -11,8 +11,12 @@ export default function Todo(props) {
         onChange={() => handleCheckTodo(todo.id)}
       />
       <p>{todo.textContent}</p>
-      <button onClick={() => handleToggleEdit(todo.id)}>edit</button>
-      <button onClick={() => handleDeleteTodo(todo.id)}>X</button>
+      <button className="btn-edit" onClick={() => handleToggleEdit(todo.id)}>
+        edit
+      </button>
+      <button className="btn-delete" onClick={() => handleDeleteTodo(todo.id)}>
+        X
+      </button>
     </li>
   );
 }

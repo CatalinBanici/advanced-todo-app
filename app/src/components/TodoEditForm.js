@@ -10,15 +10,22 @@ export default function TodoEditForm(props) {
   }
 
   return (
-    <form onSubmit={(e) => e.preventDefault()}>
-      <button onClick={() => updateTodo()}>update</button>
+    <form className="form-edit" onSubmit={(e) => e.preventDefault()}>
+      <div className="btn-update-container">
+        <button className="btn-update" onClick={() => updateTodo()}>
+          +
+        </button>
+      </div>
+
       <input
         type="text"
         placeholder="Update todo..."
         value={editInput}
         onChange={(e) => setEditInput(e.target.value)}
       />
-      <button onClick={() => handleToggleEdit(todo.id)}>x</button>
+      <button className="btn-cancel" onClick={() => handleToggleEdit(todo.id)}>
+        x
+      </button>
     </form>
   );
 }

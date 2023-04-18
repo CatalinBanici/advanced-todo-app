@@ -15,7 +15,7 @@ export default function TodoSettings(props) {
   return (
     <aside>
       <p>{todos.filter((todo) => !todo.complete).length} items left</p>
-      <div>
+      <div className="filter-container">
         <input
           type="text"
           placeholder="Search a todo..."
@@ -25,10 +25,23 @@ export default function TodoSettings(props) {
             handleFilterOption("search");
           }}
         />
-        <div>
-          <button onClick={() => handleFilterOption("all")}>All</button>
-          <button onClick={() => handleFilterOption("active")}>Active</button>
-          <button onClick={() => handleFilterOption("completed")}>
+        <div className="btn-filter-container">
+          <button
+            className="btn-filter"
+            onClick={() => handleFilterOption("all")}
+          >
+            All
+          </button>
+          <button
+            className="btn-filter"
+            onClick={() => handleFilterOption("active")}
+          >
+            Active
+          </button>
+          <button
+            className="btn-filter"
+            onClick={() => handleFilterOption("completed")}
+          >
             Completed
           </button>
         </div>

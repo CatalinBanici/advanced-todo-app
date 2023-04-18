@@ -146,7 +146,7 @@ function App() {
       <div className="app-container">
         <header>
           <h1>TODO</h1>
-          <button onClick={handleThemeChange}>
+          <button className="btn-theme" onClick={handleThemeChange}>
             {theme === "dark" ? <ThemeButtonLight /> : <ThemeButtonDark />}
           </button>
         </header>
@@ -166,7 +166,7 @@ function App() {
             setFilterOption={setFilterOption}
             handleClearTodo={handleClearTodo}
           />
-          <p>Drag and drop to reorder list</p>
+          <p className="dnd">Drag and drop to reorder list</p>
         </main>
       </div>
     </div>

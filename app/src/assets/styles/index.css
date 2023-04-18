@@ -45,7 +45,6 @@ body {
   background-image: url(../images/bg-desktop-dark.jpg);
   background-repeat: no-repeat;
   background-position: top;
-  background-size: contain;
 }
 
 .background-light {
@@ -53,5 +52,179 @@ body {
   background-image: url(../images/bg-desktop-light.jpg);
   background-repeat: no-repeat;
   background-position: top;
-  background-size: contain;
+}
+
+.app-body {
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.app-container {
+  width: 600px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-inline: 1.5em;
+}
+
+/* HEADER */
+
+header {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 4em 0 1.5em 0;
+}
+
+header h1 {
+  font-size: 3em;
+  color: white;
+  letter-spacing: 0.2em;
+}
+
+header button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+/* MAIN */
+
+main {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1.5em;
+}
+
+/* FORM */
+
+.form-add {
+  width: 100%;
+  height: 3.5em;
+  display: flex;
+  flex-direction: row;
+  margin-block: 1em;
+  background-color: var(--TodoBackground);
+  border-radius: 5px;
+}
+
+.btn-add-container {
+  height: 3.5em;
+  width: 3.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-add {
+  height: 1.7em;
+  width: 1.7em;
+  background-color: transparent;
+  color: var(--Text1);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  border: solid 1px var(--Text1);
+}
+
+.btn-add:hover {
+  background-image: linear-gradient(hsl(192, 100%, 67%), hsl(280, 87%, 65%)),
+    linear-gradient(101deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+}
+
+.btn-add:active {
+  opacity: 0.5;
+}
+
+.form-add input {
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  font-size: 1em;
+  color: var(--Text1);
+}
+
+/* SECTION */
+
+section {
+  width: 100%;
+}
+
+section ul {
+  height: min(50vh, 440px);
+  background-color: var(--TodoBackground);
+  overflow-x: hidden;
+  border-radius: 5px 5px 0 0;
+}
+
+section ul li {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 3.5em;
+  background-color: var(--TodoBackground);
+  border-bottom: 1px solid var(--Text4);
+}
+
+section ul li input {
+}
+
+section ul li p {
+  overflow-y: hidden;
+
+  height: 100%;
+  width: 100%;
+}
+
+/* ASIDE */
+
+aside {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1em;
+  height: 5em;
+  background-color: var(--TodoBackground);
+  border-radius: 0 0 5px 5px;
+  border-top: 1px solid var(--Text4);
+}
+
+.filter-container {
+  width: 40%;
+}
+
+.filter-container input {
+  width: 100%;
+  height: 2em;
+  margin-block: 0.5em;
+}
+
+.btn-filter-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.dnd {
+  padding: 3em;
 }
