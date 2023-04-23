@@ -25,6 +25,7 @@ function App() {
 
   const [todos, setTodos] = useState(STORED_TODOS);
   const [filterOption, setFilterOption] = useState(STORED_FILTER);
+  const [activeStyle, setActiveStyle] = useState("all");
   const [filteredTodos, setFilteredTodos] = useState(todos);
   const [searchInput, setSearchInput] = useState("");
   const [theme, setTheme] = useState(STORED_THEME);
@@ -108,10 +109,12 @@ function App() {
         case "active":
           setFilteredTodos(todos.filter((todo) => !todo.complete));
           setSearchInput("");
+          setActiveStyle("active");
           break;
         case "completed":
           setFilteredTodos(todos.filter((todo) => todo.complete));
           setSearchInput("");
+          setActiveStyle("completed");
           break;
         case "search":
           setFilteredTodos(
@@ -123,6 +126,7 @@ function App() {
         default:
           setFilteredTodos(todos);
           setSearchInput("");
+          setActiveStyle("all");
       }
     }
     handleFilters();
@@ -146,7 +150,11 @@ function App() {
       <div className="app-container">
         <header>
           <h1>TODO</h1>
-          <button className="btn-theme" onClick={handleThemeChange}>
+          <button
+            className="btn-theme"
+            title="Change theme"
+            onClick={handleThemeChange}
+          >
             {theme === "dark" ? <ThemeButtonLight /> : <ThemeButtonDark />}
           </button>
         </header>
@@ -164,10 +172,12 @@ function App() {
             searchInput={searchInput}
             setSearchInput={setSearchInput}
             setFilterOption={setFilterOption}
+            setActiveStyle={setActiveStyle}
+            activeStyle={activeStyle}
             handleClearTodo={handleClearTodo}
           />
-          <p className="dnd">Drag and drop to reorder list</p>
         </main>
+        <p className="dnd">Drag and drop to reorder list</p>
       </div>
     </div>
   );

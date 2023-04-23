@@ -14,6 +14,8 @@
 
   --BrightBlue: hsl(220, 98%, 61%);
   --CheckBackground: linear-gradient hsl(192, 100%, 67%) to hsl(280, 87%, 65%);
+
+  --Shadow: rgb(36, 36, 36);
 }
 
 [data-theme="light"] {
@@ -27,6 +29,8 @@
 
   --BrightBlue: hsl(220, 98%, 61%);
   --CheckBackground: linear-gradient hsl(192, 100%, 67%) to hsl(280, 87%, 65%);
+
+  --Shadow: rgb(88, 88, 88);
 }
 
 * {
@@ -105,6 +109,7 @@ main {
   justify-content: center;
   align-items: center;
   margin-top: 1.5em;
+  box-shadow: 0px 127px 274px -31px var(--Shadow);
 }
 
 /* FORM */
@@ -320,6 +325,7 @@ section ul li p {
   align-items: center;
   border: none;
   font-size: 1.2em;
+  z-index: 20;
 }
 
 .form-edit .btn-update:hover {
@@ -402,10 +408,36 @@ aside {
   color: var(--Text1);
 }
 
-.btn-filter-active {
+.btn-filter:active {
+  opacity: 0.5;
+}
+
+.btn-filter.active {
   color: var(--BrightBlue);
+}
+
+.btn-clear {
+  border: none;
+  background-color: transparent;
+  color: var(--Text3);
+  font-weight: bolder;
+  cursor: pointer;
+}
+
+.btn-clear:hover {
+  color: var(--Text1);
+}
+
+.btn-clear:active {
+  opacity: 0.5;
+}
+
+.items-left {
+  width: 91px;
+  color: var(--Text3);
 }
 
 .dnd {
   padding: 3em;
+  color: var(--Text3);
 }

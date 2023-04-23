@@ -5,16 +5,24 @@ export default function TodoSettings(props) {
     todos,
     handleClearTodo,
     setFilterOption,
+    setActiveStyle,
+    activeStyle,
     searchInput,
     setSearchInput,
   } = props;
 
   function handleFilterOption(status) {
     setFilterOption(status);
+    setActiveStyle(status);
   }
   return (
     <aside>
-      <p>{todos.filter((todo) => !todo.complete).length} items left</p>
+      <p className="items-left">
+        {todos.filter((todo) => !todo.complete).length}{" "}
+        {todos.filter((todo) => !todo.complete).length > 1
+          ? "items left"
+          : "item left"}
+      </p>
       <div className="filter-container">
         <input
           type="text"
@@ -27,26 +35,34 @@ export default function TodoSettings(props) {
         />
         <div className="btn-filter-container">
           <button
-            className="btn-filter"
+            className={
+              activeStyle === "all" ? "btn-filter active" : "btn-filter"
+            }
             onClick={() => handleFilterOption("all")}
           >
             All
           </button>
           <button
-            className="btn-filter"
+            className={
+              activeStyle === "active" ? "btn-filter active" : "btn-filter"
+            }
             onClick={() => handleFilterOption("active")}
           >
             Active
           </button>
           <button
-            className="btn-filter"
+            className={
+              activeStyle === "completed" ? "btn-filter active" : "btn-filter"
+            }
             onClick={() => handleFilterOption("completed")}
           >
             Completed
           </button>
         </div>
       </div>
-      <button onClick={handleClearTodo}>Clear Completed</button>
+      <button className="btn-clear" onClick={handleClearTodo}>
+        Clear Completed
+      </button>
     </aside>
   );
 }
