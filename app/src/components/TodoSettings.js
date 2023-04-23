@@ -18,10 +18,10 @@ export default function TodoSettings(props) {
   return (
     <aside>
       <p className="items-left">
-        {todos.filter((todo) => !todo.complete).length}{" "}
-        {todos.filter((todo) => !todo.complete).length > 1
-          ? "items left"
-          : "item left"}
+        {todos.filter((todo) => !todo.complete).length}
+        {todos.filter((todo) => !todo.complete).length === 1
+          ? " item left"
+          : " items left"}
       </p>
       <div className="filter-container">
         <input
