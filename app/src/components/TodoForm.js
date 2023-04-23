@@ -10,11 +10,9 @@ export default function TodoForm(props) {
   }
   return (
     <form className="form-add" onSubmit={(e) => e.preventDefault()}>
-      <div className="btn-add-container">
-        <button className="btn-add" onClick={addTodo}>
-          <IoMdAdd />
-        </button>
-      </div>
+      <button className="btn-add" title="Add todo" onClick={addTodo}>
+        <IoMdAdd />
+      </button>
 
       <input type="text" placeholder="Create a new todo..." ref={inputRef} />
     </form>
