@@ -138,6 +138,10 @@ main {
   border: solid 1px var(--Text4);
 }
 
+.btn-add svg {
+  font-size: 1.4em;
+}
+
 .btn-add:hover {
   background-image: linear-gradient(hsl(192, 100%, 67%), hsl(280, 87%, 65%)),
     linear-gradient(101deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
@@ -176,9 +180,10 @@ section ul {
 
 section ul li {
   display: flex;
+  position: relative;
   flex-direction: row;
   align-items: center;
-  height: 3.5em;
+  min-height: 3.5em;
   background-color: var(--TodoBackground);
   border-bottom: 1px solid var(--Text4);
 }
@@ -238,6 +243,7 @@ input:checked ~ p {
 
 input:checked:hover ~ .checkmark {
   border: 1px solid var(--Text4);
+  padding: 2px;
 }
 
 input:active ~ .checkmark {
@@ -295,7 +301,7 @@ section ul li:hover .btn-edit {
 section ul li p {
   overflow-y: hidden;
   height: 100%;
-  width: 67.4%;
+  width: min(44vw, 67.4%);
   color: var(--Text1);
   align-self: center;
   display: flex;
