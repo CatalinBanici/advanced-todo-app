@@ -5,15 +5,15 @@ export default function TodoSettings(props) {
     todos,
     handleClearTodo,
     setFilterOption,
-    setActiveStyle,
-    activeStyle,
+    activeFilterStyle,
+    setActiveFilterStyle,
     searchInput,
     setSearchInput,
   } = props;
 
   function handleFilterOption(status) {
     setFilterOption(status);
-    setActiveStyle(status);
+    setActiveFilterStyle(status);
   }
   return (
     <aside>
@@ -36,7 +36,7 @@ export default function TodoSettings(props) {
         <div className="btn-filter-container">
           <button
             className={
-              activeStyle === "all" ? "btn-filter active" : "btn-filter"
+              activeFilterStyle === "all" ? "btn-filter active" : "btn-filter"
             }
             onClick={() => handleFilterOption("all")}
           >
@@ -44,7 +44,9 @@ export default function TodoSettings(props) {
           </button>
           <button
             className={
-              activeStyle === "active" ? "btn-filter active" : "btn-filter"
+              activeFilterStyle === "active"
+                ? "btn-filter active"
+                : "btn-filter"
             }
             onClick={() => handleFilterOption("active")}
           >
@@ -52,7 +54,9 @@ export default function TodoSettings(props) {
           </button>
           <button
             className={
-              activeStyle === "completed" ? "btn-filter active" : "btn-filter"
+              activeFilterStyle === "completed"
+                ? "btn-filter active"
+                : "btn-filter"
             }
             onClick={() => handleFilterOption("completed")}
           >

@@ -25,12 +25,12 @@ function App() {
 
   const [todos, setTodos] = useState(STORED_TODOS);
   const [filterOption, setFilterOption] = useState(STORED_FILTER);
-  const [activeStyle, setActiveStyle] = useState("all");
+  const [activeFilterStyle, setActiveFilterStyle] = useState("all");
   const [filteredTodos, setFilteredTodos] = useState(todos);
   const [searchInput, setSearchInput] = useState("");
   const [theme, setTheme] = useState(STORED_THEME);
-  // local storage
 
+  // local storage
   useEffect(() => {
     localStorage.setItem(LOCAL_STORAGE_TODO_KEY, JSON.stringify(todos));
   }, [todos]);
@@ -108,13 +108,13 @@ function App() {
       switch (filterOption) {
         case "active":
           setFilteredTodos(todos.filter((todo) => !todo.complete));
+          setActiveFilterStyle("active");
           setSearchInput("");
-          setActiveStyle("active");
           break;
         case "completed":
           setFilteredTodos(todos.filter((todo) => todo.complete));
+          setActiveFilterStyle("completed");
           setSearchInput("");
-          setActiveStyle("completed");
           break;
         case "search":
           setFilteredTodos(
@@ -125,8 +125,8 @@ function App() {
           break;
         default:
           setFilteredTodos(todos);
+          setActiveFilterStyle("all");
           setSearchInput("");
-          setActiveStyle("all");
       }
     }
     handleFilters();
@@ -152,7 +152,11 @@ function App() {
           <h1>TODO</h1>
           <button
             className="btn-theme"
-            title="Change theme"
+            title={
+              theme === "dark"
+                ? "Change to Light Theme"
+                : "Change to Dark Theme"
+            }
             onClick={handleThemeChange}
           >
             {theme === "dark" ? <ThemeButtonLight /> : <ThemeButtonDark />}
@@ -161,19 +165,21 @@ function App() {
         <main>
           <TodoForm handleAddTodo={handleAddTodo} />
           <TodoList
+            todos={todos}
             filteredTodos={filteredTodos}
             handleCheckTodo={handleCheckTodo}
             handleDeleteTodo={handleDeleteTodo}
             handleToggleEdit={handleToggleEdit}
             handleUpdateTodo={handleUpdateTodo}
+            LOCAL_STORAGE_TODO_KEY={LOCAL_STORAGE_TODO_KEY}
           />
           <TodoSettings
             todos={todos}
             searchInput={searchInput}
             setSearchInput={setSearchInput}
             setFilterOption={setFilterOption}
-            setActiveStyle={setActiveStyle}
-            activeStyle={activeStyle}
+            activeFilterStyle={activeFilterStyle}
+            setActiveFilterStyle={setActiveFilterStyle}
             handleClearTodo={handleClearTodo}
           />
         </main>

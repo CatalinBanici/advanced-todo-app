@@ -185,7 +185,10 @@ section ul li {
   align-items: center;
   min-height: 3.5em;
   background-color: var(--TodoBackground);
-  border-bottom: 1px solid var(--Text4);
+
+  /* this is dynamically added in the draggable component
+  border-top: 1px solid var(--Text4);
+  border-bottom: 1px solid var(--Text4); */
 }
 
 section ul li input {
@@ -300,7 +303,7 @@ section ul li:hover .btn-edit {
 
 section ul li p {
   overflow-y: hidden;
-  height: 100%;
+  height: 3.5em;
   width: min(44vw, 67.4%);
   color: var(--Text1);
   align-self: center;
@@ -316,6 +319,7 @@ section ul li p {
   display: flex;
   flex-direction: row;
   background-color: var(--TodoBackground);
+  border-top: 1px solid var(--Text4);
   border-bottom: 1px solid var(--Text4);
 }
 
