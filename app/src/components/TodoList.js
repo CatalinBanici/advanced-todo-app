@@ -21,7 +21,7 @@ export default function TodoList(props) {
         onDragEnd={(param) => {
           const srcI = param.source.index;
           const desI = param.destination?.index;
-          if (desI) {
+          if (desI >= 0) {
             todos.splice(desI, 0, todos.splice(srcI, 1)[0]);
             localStorage.setItem(LOCAL_STORAGE_TODO_KEY, JSON.stringify(todos));
           }
