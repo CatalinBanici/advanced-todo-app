@@ -71,7 +71,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   padding-inline: 1.5em;
 }
@@ -188,7 +188,7 @@ section {
 }
 
 section ul {
-  height: min(50vh, 440px);
+  height: min(45vh, 100vh);
   background-color: var(--TodoBackground);
   overflow-x: hidden;
   border-radius: 5px 5px 0 0;
@@ -413,6 +413,7 @@ section ul li:hover > .btn-edit-del-container {
 .form-edit input {
   flex: 1;
   height: 100%;
+  width: 100%;
   background-color: transparent;
   outline: none;
   border: none;
@@ -450,7 +451,7 @@ section ul li:hover > .btn-edit-del-container {
 
 /* ASIDE */
 
-aside {
+.aside-container {
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -465,6 +466,10 @@ aside {
 
 .filter-container {
   width: 40%;
+}
+
+.filter-container-2 {
+  display: none;
 }
 
 .filter-container input {
@@ -528,4 +533,83 @@ aside {
 .dnd {
   padding: 3em;
   color: var(--Text3);
+}
+
+@media (max-width: 1000px) {
+  .btn-edit-del-container {
+    display: flex;
+    width: 20%;
+    flex-direction: row;
+  }
+}
+
+@media (max-width: 440px) {
+  .background-dark {
+    background-image: url(../images/bg-mobile-dark.jpg);
+    background-size: contain;
+  }
+
+  .background-light {
+    background-image: url(../images/bg-mobile-light.jpg);
+    background-size: contain;
+  }
+
+  header {
+    margin: 2em 0 1em 0;
+  }
+
+  header h1 {
+    font-size: 2em;
+  }
+
+  main {
+    margin: 0;
+  }
+
+  section ul {
+    height: 40vh;
+  }
+
+  .filter-container {
+    display: none;
+  }
+
+  .aside-container {
+    height: 3em;
+  }
+
+  .filter-container-2 {
+    width: 60%;
+    height: 3em;
+    display: block;
+    margin: 0.5em auto;
+  }
+
+  .filter-container-2 input {
+    width: 100%;
+    height: 50%;
+    margin-block: 0.5em;
+  }
+}
+
+@media (max-width: 350px) {
+  .checkbox-container {
+    width: 2em;
+  }
+
+  .btn-edit-del-container {
+    width: 3.5em;
+  }
+
+  .btn-edit-container {
+    width: 2em;
+  }
+
+  .btn-update {
+    width: 100%;
+  }
+
+  .btn-cancel-container {
+    width: 15%;
+  }
 }
