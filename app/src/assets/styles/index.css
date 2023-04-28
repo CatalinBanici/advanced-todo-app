@@ -112,8 +112,9 @@ main {
   box-shadow: 0px 127px 274px -31px var(--Shadow);
 }
 
-/* FORM */
+/* ===== FORM ADD ===== */
 
+/* form */
 .form-add {
   width: 100%;
   height: 3.5em;
@@ -124,22 +125,30 @@ main {
   border-radius: 5px;
 }
 
-.btn-add {
-  height: 1.7em;
-  width: 2em;
-  margin: 1.6em;
-  background-color: transparent;
-  color: var(--Text1);
-  cursor: pointer;
+/* form button */
+.btn-add-container {
+  height: 100%;
+  width: 4em;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.btn-add {
+  height: 40%;
+  width: 40%;
+  border: 1px solid var(--Text4);
   border-radius: 50%;
-  border: solid 1px var(--Text4);
+  color: var(--Text1);
+  background-color: transparent;
+  cursor: pointer;
 }
 
 .btn-add svg {
-  font-size: 1.4em;
+  height: 80%;
+  width: 80%;
+  display: block;
+  margin: 0 auto;
 }
 
 .btn-add:hover {
@@ -155,6 +164,7 @@ main {
   opacity: 0.5;
 }
 
+/* form input */
 .form-add input {
   width: 100%;
   height: 100%;
@@ -165,8 +175,9 @@ main {
   color: var(--Text1);
 }
 
-/* SECTION */
+/* ===== TODO LIST ===== */
 
+/* section */
 section {
   width: 100%;
 }
@@ -191,30 +202,40 @@ section ul li {
   border-bottom: 1px solid var(--Text4); */
 }
 
-section ul li input {
+/* todo check input */
+.checkbox-container {
+  height: 100%;
+  width: 3.5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.checkbox-container input {
   position: absolute;
   opacity: 0;
   cursor: pointer;
-  height: 1.6em;
-  width: 1.7em;
-  margin: 1.5em;
+  height: 2em;
+  width: 2em;
   z-index: 10;
 }
 
 .checkmark {
   position: relative;
-  top: 0;
-  left: 0;
-  width: 1.24em;
-  height: 1.2em;
-  margin: 1.2em;
+  width: 1.3em;
+  height: 1.3em;
   background-color: transparent;
   border-radius: 50%;
   border: solid 1px var(--Text4);
   cursor: pointer;
 }
 
-input:hover ~ .checkmark {
+.checkmark svg {
+  display: block;
+  margin: 2px auto;
+}
+
+.checkbox-container input:hover ~ .checkmark {
   border: solid 1px transparent;
   background-image: linear-gradient(
       var(--TodoBackground),
@@ -226,43 +247,63 @@ input:hover ~ .checkmark {
   background-clip: content-box, border-box;
 }
 
-input:checked ~ .checkmark {
+.checkbox-container input:checked ~ .checkmark {
   border: solid 1px transparent;
   background-image: linear-gradient(hsl(192, 100%, 67%), hsl(280, 87%, 65%)),
     linear-gradient(101deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
-
   background-origin: border-box;
   background-clip: content-box, border-box;
   color: white;
-  content: url(../images/icon-check.svg);
-  width: 1.24em;
-  height: 1.2em;
 }
 
-input:checked ~ p {
-  color: var(--Text3);
-  text-decoration: line-through;
+.checkbox-container input:checked:hover ~ .checkmark {
+  background-image: linear-gradient(
+      var(--TodoBackground),
+      var(--TodoBackground)
+    ),
+    linear-gradient(101deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+  color: var(--Text1);
 }
 
-input:checked:hover ~ .checkmark {
-  border: 1px solid var(--Text4);
-  padding: 2px;
-}
-
-input:active ~ .checkmark {
+.checkbox-container input:active ~ .checkmark {
   opacity: 0.5;
 }
 
-.btn-edit {
-  display: none;
-  justify-content: center;
+/* todo text */
+section ul li p {
+  overflow-y: hidden;
+  height: 3.5em;
+  color: var(--Text1);
+  align-self: center;
+  display: flex;
   align-items: center;
+  flex: 1;
+}
+
+/* todo buttons edit delete */
+.btn-edit-del-container {
+  display: none;
+  width: 20%;
+  flex-direction: row;
+}
+
+section ul li:hover > .btn-edit-del-container {
+  display: flex;
+}
+
+.btn-edit {
+  display: block;
+  margin: 0 auto;
   border: none;
   background-color: transparent;
   font-size: 1.5em;
   color: var(--Text4);
-  margin: 0.5em;
   cursor: pointer;
+}
+
+.btn-edit svg {
+  display: block;
+  margin: 0 auto;
 }
 
 .btn-edit:hover {
@@ -274,15 +315,18 @@ input:active ~ .checkmark {
 }
 
 .btn-delete {
-  display: none;
-  justify-content: center;
-  align-items: center;
+  display: block;
+  margin: 0 auto;
   border: none;
   background-color: transparent;
   font-size: 1.5em;
   color: var(--Text4);
-  margin: 0.5em;
   cursor: pointer;
+}
+
+.btn-delete svg {
+  display: block;
+  margin: 0 auto;
 }
 
 .btn-delete:hover {
@@ -293,61 +337,55 @@ input:active ~ .checkmark {
   opacity: 0.5;
 }
 
-section ul li:hover .btn-delete {
-  display: flex;
-}
+/* ===== FORM EDIT ===== */
 
-section ul li:hover .btn-edit {
-  display: flex;
-}
-
-section ul li p {
-  overflow-y: hidden;
-  height: 3.5em;
-  width: min(44vw, 67.4%);
-  color: var(--Text1);
-  align-self: center;
-  display: flex;
-  align-items: center;
-}
-
-/* EDIT FORM */
-
+/* edit form */
 .form-edit {
   width: 100%;
-  height: 3.5em;
+  height: 3.6em;
   display: flex;
   flex-direction: row;
   background-color: var(--TodoBackground);
-  border-top: 1px solid var(--Text4);
-  border-bottom: 1px solid var(--Text4);
+  border: 1px solid var(--Text4);
 }
 
-.form-edit .btn-update {
-  height: 1.7em;
-  width: 2.3em;
-  margin: 0.6em;
-  background-color: transparent;
-  color: var(--Text2);
-  cursor: pointer;
+/* edit form button update */
+.btn-edit-container {
+  height: 100%;
+  width: 3.5em;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.btn-update {
+  height: 50%;
+  width: 50%;
+  background-color: transparent;
+  color: var(--Text2);
+  cursor: pointer;
   border: none;
-  font-size: 1.2em;
   z-index: 20;
 }
 
-.form-edit .btn-update:hover {
+.btn-update svg {
+  height: 80%;
+  width: 80%;
+  display: block;
+  margin: 0 auto;
+}
+
+.btn-update:hover {
   color: var(--Text1);
 }
 
-.form-edit .btn-update:active {
+.btn-update:active {
   opacity: 0.5;
 }
 
+/* edit form input */
 .form-edit input {
-  width: 100%;
+  flex: 1;
   height: 100%;
   background-color: transparent;
   outline: none;
@@ -356,7 +394,16 @@ section ul li p {
   color: var(--Text1);
 }
 
-.form-edit .btn-cancel {
+/* edit form button cancel */
+.btn-cancel-container {
+  height: 100%;
+  width: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-cancel {
   border: none;
   background-color: transparent;
   font-size: 1.5em;
@@ -367,11 +414,11 @@ section ul li p {
   color: var(--Text4);
 }
 
-.form-edit .btn-cancel:hover {
+.btn-cancel:hover {
   color: var(--Text2);
 }
 
-.form-edit .btn-cancel:active {
+.btn-cancel:active {
   opacity: 0.5;
 }
 

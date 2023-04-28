@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
-import { IoMdAdd } from "react-icons/io";
+
+import { IoAddSharp } from "react-icons/io5";
 
 export default function TodoForm(props) {
   const { handleAddTodo } = props;
@@ -10,9 +11,11 @@ export default function TodoForm(props) {
   }
   return (
     <form className="form-add" onSubmit={(e) => e.preventDefault()}>
-      <button className="btn-add" title="Add todo" onClick={addTodo}>
-        <IoMdAdd />
-      </button>
+      <div className="btn-add-container">
+        <button className="btn-add" title="Add todo" onClick={addTodo}>
+          <IoAddSharp />
+        </button>
+      </div>
 
       <input type="text" placeholder="Create a new todo..." ref={inputRef} />
     </form>

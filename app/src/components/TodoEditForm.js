@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import { RxUpdate } from "react-icons/rx";
 import { MdOutlineCancel } from "react-icons/md";
 
@@ -13,13 +14,15 @@ export default function TodoEditForm(props) {
 
   return (
     <form className="form-edit" onSubmit={(e) => e.preventDefault()}>
-      <button
-        className="btn-update"
-        title="Update todo"
-        onClick={() => updateTodo()}
-      >
-        <RxUpdate />
-      </button>
+      <div className="btn-edit-container">
+        <button
+          className="btn-update"
+          title="Update todo"
+          onClick={() => updateTodo()}
+        >
+          <RxUpdate />
+        </button>
+      </div>
 
       <input
         type="text"
@@ -28,13 +31,16 @@ export default function TodoEditForm(props) {
         value={editInput}
         onChange={(e) => setEditInput(e.target.value)}
       />
-      <button
-        className="btn-cancel"
-        title="Cancel"
-        onClick={() => handleToggleEdit(todo.id)}
-      >
-        <MdOutlineCancel />
-      </button>
+
+      <div className="btn-cancel-container">
+        <button
+          className="btn-cancel"
+          title="Cancel"
+          onClick={() => handleToggleEdit(todo.id)}
+        >
+          <MdOutlineCancel />
+        </button>
+      </div>
     </form>
   );
 }
