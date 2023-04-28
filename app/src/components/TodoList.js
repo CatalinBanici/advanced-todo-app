@@ -34,6 +34,7 @@ export default function TodoList(props) {
                 todo.isEditing ? (
                   <TodoEditForm
                     key={todo.id}
+                    index={index}
                     todo={todo}
                     handleUpdateTodo={handleUpdateTodo}
                     handleToggleEdit={handleToggleEdit}
