@@ -15,7 +15,7 @@
   --BrightBlue: hsl(220, 98%, 61%);
   --CheckBackground: linear-gradient hsl(192, 100%, 67%) to hsl(280, 87%, 65%);
 
-  --Shadow: rgb(36, 36, 36);
+  --Shadow: rgb(0, 0, 0);
 }
 
 [data-theme="light"] {
@@ -30,7 +30,7 @@
   --BrightBlue: hsl(220, 98%, 61%);
   --CheckBackground: linear-gradient hsl(192, 100%, 67%) to hsl(280, 87%, 65%);
 
-  --Shadow: rgb(88, 88, 88);
+  --Shadow: rgb(209, 209, 209);
 }
 
 * {
@@ -97,6 +97,7 @@ header button {
   border: none;
   background-color: transparent;
   cursor: pointer;
+  transition: 0.5s;
 }
 
 /* MAIN */
@@ -109,7 +110,6 @@ main {
   justify-content: center;
   align-items: center;
   margin-top: 1.5em;
-  box-shadow: 0px 127px 274px -31px var(--Shadow);
 }
 
 /* ===== FORM ADD ===== */
@@ -176,6 +176,11 @@ main {
 }
 
 /* ===== TODO LIST ===== */
+
+.section-aside-container {
+  width: 100%;
+  box-shadow: 0px 10px 48px 0px var(--Shadow);
+}
 
 /* section */
 section {
@@ -337,6 +342,27 @@ section ul li:hover > .btn-edit-del-container {
   opacity: 0.5;
 }
 
+/* scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--Text4);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--Text3);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--Text2);
+}
+
+::-webkit-scrollbar-thumb:active {
+  background-color: var(--Text1);
+}
+
 /* ===== FORM EDIT ===== */
 
 /* edit form */
@@ -445,6 +471,11 @@ aside {
   width: 100%;
   height: 2em;
   margin-block: 0.5em;
+  color: var(--Text1);
+  background-color: transparent;
+  border: 1px solid var(--Text1);
+  border-radius: 5px;
+  padding: 5px;
 }
 
 .btn-filter-container {

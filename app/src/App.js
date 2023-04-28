@@ -165,24 +165,26 @@ function App() {
         </header>
         <main>
           <TodoForm handleAddTodo={handleAddTodo} />
-          <TodoList
-            todos={todos}
-            filteredTodos={filteredTodos}
-            handleCheckTodo={handleCheckTodo}
-            handleDeleteTodo={handleDeleteTodo}
-            handleToggleEdit={handleToggleEdit}
-            handleUpdateTodo={handleUpdateTodo}
-            LOCAL_STORAGE_TODO_KEY={LOCAL_STORAGE_TODO_KEY}
-          />
-          <TodoSettings
-            todos={todos}
-            searchInput={searchInput}
-            setSearchInput={setSearchInput}
-            setFilterOption={setFilterOption}
-            activeFilterStyle={activeFilterStyle}
-            setActiveFilterStyle={setActiveFilterStyle}
-            handleClearTodo={handleClearTodo}
-          />
+          <div className="section-aside-container">
+            <TodoList
+              todos={todos}
+              filteredTodos={filteredTodos}
+              handleCheckTodo={handleCheckTodo}
+              handleDeleteTodo={handleDeleteTodo}
+              handleToggleEdit={handleToggleEdit}
+              handleUpdateTodo={handleUpdateTodo}
+              LOCAL_STORAGE_TODO_KEY={LOCAL_STORAGE_TODO_KEY}
+            />
+            <TodoSettings
+              todos={todos}
+              searchInput={searchInput}
+              setSearchInput={setSearchInput}
+              setFilterOption={setFilterOption}
+              activeFilterStyle={activeFilterStyle}
+              setActiveFilterStyle={setActiveFilterStyle}
+              handleClearTodo={handleClearTodo}
+            />
+          </div>
         </main>
         <p className="dnd">Drag and drop to reorder list</p>
       </div>
