@@ -169,6 +169,7 @@ function App() {
             <TodoList
               todos={todos}
               filteredTodos={filteredTodos}
+              activeFilterStyle={activeFilterStyle}
               handleCheckTodo={handleCheckTodo}
               handleDeleteTodo={handleDeleteTodo}
               handleToggleEdit={handleToggleEdit}

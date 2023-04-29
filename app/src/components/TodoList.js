@@ -9,6 +9,7 @@ export default function TodoList(props) {
   const {
     todos,
     filteredTodos,
+    activeFilterStyle,
     handleCheckTodo,
     handleDeleteTodo,
     handleToggleEdit,
@@ -21,7 +22,7 @@ export default function TodoList(props) {
         onDragEnd={(param) => {
           const srcI = param.source.index;
           const desI = param.destination?.index;
-          if (desI >= 0) {
+          if (desI >= 0 && activeFilterStyle === "all") {
             todos.splice(desI, 0, todos.splice(srcI, 1)[0]);
             localStorage.setItem(LOCAL_STORAGE_TODO_KEY, JSON.stringify(todos));
           }
